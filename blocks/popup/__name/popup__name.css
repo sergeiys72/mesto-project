@@ -1,0 +1,14 @@
+.popup__name {
+  margin-bottom: 30px;
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid #bcbcc4;
+}
+
+.popup__name::placeholder {
+  color: black;
+}
+
+.popup__name:focus {
+  outline: none;
+}

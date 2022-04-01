@@ -1,0 +1,14 @@
+.popup__about {
+  margin-bottom: 48px;
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid #bcbcc4;
+}
+
+.popup__about::placeholder {
+  color: black;
+}
+
+.popup__about:focus {
+  outline: none;
+}

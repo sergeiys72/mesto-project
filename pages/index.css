@@ -1,0 +1,45 @@
+@import url(../vendor/normalize.css);
+@import url(../vendor/fonts__inter.css);
+
+@import url(../blocks/root/root.css);
+
+/*! ШАПКА */
+@import url(../blocks/header/header.css);
+@import url(../blocks/header/__logo/header__logo.css);
+@import url(../blocks/header/__line/header__line.css);
+
+/*! MAIN */
+@import url(../blocks/main/main.css);
+
+/*! ПРОФИЛЬ */
+@import url(../blocks/profile/profile.css);
+@import url(../blocks/profile/__avatar/profile__avatar.css);
+@import url(../blocks/profile/__info/profile__info.css);
+@import url(../blocks/profile/__name/profile__name.css);
+@import url(../blocks/profile/__about/profile__about.css);
+@import url(../blocks/profile/__button-edit/profile__button-edit.css);
+@import url(../blocks/profile/__button-add/profile__button-add.css);
+
+/*! ГАЛЕРЕЯ */
+@import url(../blocks/galery/galery.css);
+@import url(../blocks/galery/__grid-container/galery__grid-container.css);
+@import url(../blocks/galery/__card/galery__card.css);
+@import url(../blocks/galery/__image/galery__image.css);
+@import url(../blocks/galery/__title/galery__title.css);
+@import url(../blocks/galery/__button-heart/galery__button-heart.css);
+@import url(../blocks/galery/__button-heart/_target_active/galery__button-heart_target_active.css);
+
+/*! FOOTER */
+@import url(../blocks/footer/footer.css);
+@import url(../blocks/footer/__copy/footer__copy.css);
+
+/*! POPUP */
+@import url(../blocks/popup/popup.css);
+@import url(../blocks/popup/__container/popup__container.css);
+@import url(../blocks/popup/__button-close/popup__button-close.css);
+@import url(../blocks/popup/__form/popup__form.css);
+@import url(../blocks/popup/__title/popup__title.css);
+@import url(../blocks/popup/__name/popup__name.css);
+@import url(../blocks/popup/__about/popup__about.css);
+@import url(../blocks/popup/__button/popup__button.css);
+@import url(../blocks/popup/_condition/popup_condition.css);
