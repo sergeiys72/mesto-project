@@ -6,11 +6,14 @@
   position: fixed;
   top: 0;
   left: 0;
+  justify-content: center;
+  align-items: center;
 }
 
 @media screen and (max-width: 767.98px) {
   .popup {
-    padding: 0 19px;
+    padding: 123px 19px 0;
     box-sizing: border-box;
+    align-items: flex-start;
   }
 }
