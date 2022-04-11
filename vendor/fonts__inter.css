@@ -12,8 +12,8 @@
 }
 
 @font-face {
-  src: url("../fonts/Inter/inter-v8-latin-500.woff") format("woff"),
-    url("../fonts/Inter/inter-v8-latin-500.woff2") format("woff2");
+  src: url("../fonts/Inter/Inter-Medium.woff") format("woff"),
+    url("../fonts/Inter/Inter-Medium.woff2") format("woff2");
   font-family: "inter";
   font-weight: 500;
 }
