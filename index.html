@@ -22,11 +22,15 @@
   <main class="main">
     <!--! ПРОФИЛЬ -->
     <section class="profile">
-      <img src="./images/avatar.jpg" alt="Аватарка" class="profile__avatar">
       <div class="profile__info">
-        <h1 class="profile__name">Жак-Ив Кусто</h1>
-        <button class="profile__button-edit" type="button" aria-label="edit profile"></button>
-        <p class="profile__about">Исследователь океана</p>
+        <img src="./images/avatar.jpg" alt="Аватарка" class="profile__avatar">
+        <div class="profile__text">
+          <div>
+            <h1 class="profile__name">Жак-Ив Кусто</h1>
+            <button class="profile__button-edit" type="button" aria-label="edit profile"></button>
+          </div>
+          <p class="profile__about">Исследователь океана</p>
+        </div>
       </div>
       <button class="profile__button-add" type="button" aria-label="add image"></button>
     </section>
@@ -35,32 +39,38 @@
     <section class="galery">
       <ul class="galery__grid-container">
         <li class="galery__card">
+          <button class="galery__delet"></button>
           <img src="./images/places/kara.jpg" alt="старое кирпичное зданеие на холме" class="galery__image">
           <h2 class="galery__title">Карачевск</h2>
           <!--* поставить лайк: galery__button-heart_active -->
           <button class="galery__button-heart" type="button" aria-label="like"></button>
         </li>
         <li class="galery__card">
+          <button class="galery__delet"></button>
           <img src="./images/places/elbrus.jpg" alt="гора Эльбрус со снежной вершиной" class="galery__image">
           <h2 class="galery__title">Гора Эльбрус</h2>
           <button class="galery__button-heart" type="button" aria-label="like"></button>
         </li>
         <li class="galery__card">
+          <button class="galery__delet"></button>
           <img src="./images/places/dombay.jpg" alt="степная равнина ухадящая в горизонт" class="galery__image">
           <h2 class="galery__title">Домбай</h2>
           <button class="galery__button-heart" type="button" aria-label="like"></button>
         </li>
         <li class="galery__card">
+          <button class="galery__delet"></button>
           <img src="./images/places/elbrus.jpg" alt="старое кирпичное зданеие на холме" class="galery__image">
           <h2 class="galery__title">Гора Эльбрус</h2>
           <button class="galery__button-heart" type="button" aria-label="like"></button>
         </li>
         <li class="galery__card">
+          <button class="galery__delet"></button>
           <img src="./images/places/dombay.jpg" alt="степная равнина ухадящая в горизонт" class="galery__image">
           <h2 class="galery__title">Домбай</h2>
           <button class="galery__button-heart" type="button" aria-label="like"></button>
         </li>
         <li class="galery__card">
+          <button class="galery__delet"></button>
           <img src="./images/places/kara.jpg" alt="старое кирпичное зданеие на холме" class="galery__image">
           <h2 class="galery__title">Карачаевск-Черкесск </h2>
           <button class="galery__button-heart" type="button" aria-label="like"></button>
@@ -76,17 +86,47 @@
 
   <!--! POPUP -->
   <!--* открыть модальное окно: popup_active -->
-  <div class="popup">
+  <div class="popup" id="user">
     <div class="popup__container">
       <button class="popup__button-close" type="button" aria-label="close popup"></button>
       <h2 class="popup__title">Редактировать профиль</h2>
-      <form action="#" method="post" name="info_about_user">
+      <form id="popup__form" action="#" method="post" name="info_about_user">
         <input class="popup__input popup__input_type_name" type="text" name="name" placeholder="Имя">
         <input class="popup__input popup__input_type_about" type="text" name="about" placeholder="О себе">
         <input class="popup__button" type="submit" value="Сохранить">
       </form>
     </div>
   </div>
+  <div class="popup" id="card">
+    <div class="popup__container">
+      <button class="popup__button-close" type="button" aria-label="close popup"></button>
+      <h2 class="popup__title">Новое место</h2>
+      <form id="popup__form" action="#" method="post" name="add_new_card">
+        <input class="popup__input popup__input_type_name" type="text" name="name" placeholder="Название">
+        <input class="popup__input popup__input_type_about" type="text" name="link" placeholder="Ссылка на картинку">
+        <input class="popup__button" type="submit" value="Сохранить">
+      </form>
+    </div>
+  </div>
+  <div class="popup" id="image">
+    <div class="popup__image-container">
+      <button class="popup__button-close" type="button" aria-label="close popup"></button>
+      <img class="popup__image" src="" alt="пейзаж">
+      <h2 class="popup__text"></h2>
+    </div>
+  </div>
+
+  <template id="galery-card">
+    <li class="galery__card">
+      <button class="galery__delet"></button>
+      <img src="" alt="старое кирпичное зданеие на холме" class="galery__image">
+      <h2 class="galery__title"></h2>
+      <!--* поставить лайк: galery__button-heart_active -->
+      <button class="galery__button-heart" type="button" aria-label="like"></button>
+    </li>
+  </template>
+
+  <script src="./js/script.js"></script>
 </body>
 
 </html>
