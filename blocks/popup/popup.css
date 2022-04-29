@@ -10,7 +10,7 @@
   align-items: center;
   visibility: hidden;
   opacity: 0;
-
+  transition: visibility 0.5s, opacity 0.5s;
 }
 
 @media screen and (max-width: 767.98px) {
@@ -18,10 +18,4 @@
     padding: 0 19px 0;
     box-sizing: border-box;
   }
-}
-
-
-.low-open{
-
-
 }

@@ -1,130 +1,91 @@
-//! ПЕРЕМЕННЫЕ ПРОФИЛЯ
-let profile = document.querySelector('.profile');
-let profileBtEdit = profile.querySelector('.profile__button-edit');
-let CardBtAdd = profile.querySelector('.profile__button-add');
+//! ПЕРЕМЕННЫЕ
+const profile = document.querySelector('.profile');
+const profileBtEdit = profile.querySelector('.profile__button-edit');
+const cardBtAdd = profile.querySelector('.profile__button-add');
 let profileName = profile.querySelector('.profile__name');
 let profileAbout = profile.querySelector('.profile__about');
 
-//! ПЕРЕМЕННЫЕ POPUP ДЛЯ ПРОФИЛЯ
-let popupUser = document.querySelector('#user');
-let popupUserBtClose = popupUser.querySelector('.popup__button-close');
-let formUser = popupUser.querySelector('#popup__form');
+const popupUser = document.querySelector('#user');
+const formUser = popupUser.querySelector('#popup__form');
+let popupNameUser = popupUser.querySelector('.popup__input_type_name');
+let popupAboutUser = popupUser.querySelector('.popup__input_type_about');
 
-//! ПЕРЕМЕННЫЕ POPUP ДЛЯ ГАЛЕРЕИ
-let popupCard = document.querySelector('#card');
-let popupCardBtClose = popupCard.querySelector('.popup__button-close');
-let cardFrom = popupCard.querySelector('#popup__form');
+const popupCard = document.querySelector('#card');
+const formCard = popupCard.querySelector('#popup__form');
+let popupNameCard = popupCard.querySelector('.popup__input_type_name');
+let popupLinkCard = popupCard.querySelector('.popup__input_type_about');
 
-let popupImage = document.querySelector('#image');
-let popupImageBtclose = popupImage.querySelector('.popup__button-close');
+const popupImage = document.querySelector('#image');
+const buttonsClose = document.querySelectorAll('.popup__button-close');
+const galeryContainer = document.querySelector('.galery__grid-container');
 
-//! ПЕРЕМЕННЫЕ ДЛЯ ГАЛЕРЕИ
-let galeryContainer = document.querySelector('.galery__grid-container');
-
-
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
-
+//! ИМПОРТ МАСИВА С КАРТАМИ
+import { initialCards } from "./container-for-card.js";
 
 //! ВЫЗОВ ФУНКЦИ
-newCard();
-openPopup(popupCard, popupCardBtClose, CardBtAdd);
-editCardPopup(cardFrom, popupCard);
-openPopup(popupUser, popupUserBtClose, profileBtEdit);
-editUserPopup(formUser, popupUser);
-
+setOpenListenersToPopup(popupCard, cardBtAdd);
+setOpenListenersToPopup(popupUser, profileBtEdit);
 
 //! ДОБАВЛЯЕТ НОВЫЕ 6 КАРТ ИЗ МАСИВА "initialCards"
-function newCard() {
-  galeryContainer.innerHTML = "";
-  for (let i = 0; i < initialCards.length; ++i) {
-    addCard(initialCards[i].name, initialCards[i].link);
-  }
+galeryContainer.innerHTML = "";
+for (let i = 0; i < initialCards.length; ++i) {
+  createCard(initialCards[i].name, initialCards[i].link);
+}
+
+//! ЗАКРЫВВАЕТ POPUP ОКНА
+//? я слышал что использовать parentElement не совсем коректно
+//? такак сделав еще оду обертку в html код сламается
+//? но как обратится к родителю не используя parentElement я найти не смог
+for (let i = 0; i < buttonsClose.length; i++) {
+  buttonsClose[i].addEventListener('click', function (e) {
+    e.target.parentElement.parentElement.classList.remove('popup_active');
+  });
 }
 
 //! РЕДАКТИРУЕТ ДАННЕ "О СЕБЕ" В ПРОФИЛЕ
-function editUserPopup(form, popup) {
-  form.addEventListener('submit', function (event) {
-    event.preventDefault();
-    let popupName = popup.querySelector('.popup__input_type_name');
-    let popupAbout = popup.querySelector('.popup__input_type_about');
+formUser.addEventListener('submit', function (event) {
+  event.preventDefault();
 
-    if (popupName.value !== '' && popupAbout.value !== '') {
-      profileName.textContent = popupName.value;
-      profileAbout.textContent = popupAbout.value;
-    } else {
-      popupName.placeholder = 'Введите данные';
-      popupAbout.placeholder = 'Введите данные';
-      return;
-    }
-
-    popupName.placeholder = profileName.textContent;
-    popupAbout.placeholder = profileAbout.textContent;
-
-    //PopupName.value = "";
-    //PopupAbout.value = "";
-    popup.classList.remove('popup_active');
-  });
-}
+  if (popupNameUser.value !== '' && popupAboutUser.value !== '') {
+    profileName.textContent = popupNameUser.value;
+    profileAbout.textContent = popupAboutUser.value;
+  }
+  closePopup(popupUser);
+});
 
 //! ДОБАВЛЯЕТ НОВЫЕ КАРТЫ В ГАЛЕРЕЮ
-function editCardPopup(form, popup) {
-  form.addEventListener('submit', function (event) {
-    event.preventDefault();
-    let popupName = popup.querySelector('.popup__input_type_name');
-    let popupLink = popup.querySelector('.popup__input_type_about');
+formCard.addEventListener('submit', function (event) {
+  event.preventDefault();
+  if (popupNameCard.value !== '' && popupLinkCard.value !== '') {
+    createCard(popupNameCard.value, popupLinkCard.value);
+  }
+  popupNameCard.value = "";
+  popupLinkCard.value = "";
 
-    if (popupName.value !== '' && popupLink.value !== '') {
-      addCard(popupName.value, popupLink.value);
-    } else {
-      popupName.placeholder = 'Введите данные';
-      popupLink.placeholder = 'Введите данные';
-      return;
-    }
+  closePopup(popupCard);
+});
 
-    popupName.value = "";
-    popupLink.value = "";
-    popup.classList.remove('popup_active');
-  });
-}
-
-//! ОТКРЫВАЕТ И ЗАКРЫВАЕТ POPUP ОКНО
-function openPopup(popup, closeBt, openBt) {
+//! ОТКРЫВАЕТ POPUP ОКНА
+function setOpenListenersToPopup(popup, openBt) {
   openBt.addEventListener('click', function () {
     popup.classList.add('popup_active');
-  });
-
-  closeBt.addEventListener('click', function () {
-    popup.classList.remove('popup_active');
+    popupNameUser.value = profileName.textContent;
+    popupAboutUser.value = profileAbout.textContent;
   });
 }
 
-//! СОЗДАЕТ ЗАГОТОВКУ КАРТЫ И ДОБАВЛЯЕТ ЕЁ НА СТРАНИЦУ
-function addCard(name, link) {
+//! ДЕЛАЕТ ЭЛЕМЕНТ ВИДИМЫМ
+function openPopup(popup) {
+  popup.classList.add('popup_active');
+}
+
+//! ДЕЛАЕТ ЭЛЕМЕТ НЕВИДИМЫМ
+function closePopup(popup) {
+  popup.classList.remove('popup_active');
+}
+
+//! СОЗДАЕТ ЗАГОТОВКУ КАРТЫ
+function createCard(name, link) {
   const galeryCard = document.querySelector('#galery-card').content;
   const cardElement = galeryCard.querySelector('.galery__card').cloneNode(true);
 
@@ -136,13 +97,20 @@ function addCard(name, link) {
     let popupImg = document.querySelector('.popup__image');
     let popupText = document.querySelector('.popup__text');
     popupImg.src = e.target.src;
+    popupImg.alt = name;
     popupText.textContent = name;
-    openPopup(popupImage, popupImageBtclose, e.target);
-
+    openPopup(popupImage);
   });
   cardElement.querySelector('.galery__title').textContent = name;
   cardElement.querySelector('.galery__button-heart').addEventListener('click', function (e) {
     e.target.classList.toggle('galery__button-heart_active');
   });
-  galeryContainer.prepend(cardElement);
+  addCard(cardElement, galeryContainer);
 }
+
+//! ДОБАВЛЯЕТ КАРТУ В ГАЛЕРЕЮ
+function addCard(card, container) {
+  container.prepend(card);
+}
+
+

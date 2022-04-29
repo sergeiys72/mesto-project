@@ -2,10 +2,11 @@
   width: 100%;
   border: 0;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 13.26px 0;
 }
 
 .popup__input::placeholder {
-  color: black;
+  color: #C4C4C4;
 }
 
 .popup__input:focus {
