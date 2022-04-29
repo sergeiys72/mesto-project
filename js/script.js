@@ -29,13 +29,10 @@ setOpenListenersToPopup(popupUser, profileBtEdit);
 //! ДОБАВЛЯЕТ НОВЫЕ 6 КАРТ ИЗ МАСИВА "initialCards"
 galeryContainer.innerHTML = "";
 for (let i = 0; i < initialCards.length; ++i) {
-  createCard(initialCards[i].name, initialCards[i].link);
+  addCard(createCard(initialCards[i].name, initialCards[i].link), galeryContainer);
 }
 
-//! ЗАКРЫВВАЕТ POPUP ОКНА
-//? я слышал что использовать parentElement не совсем коректно
-//? такак сделав еще оду обертку в html код сламается
-//? но как обратится к родителю не используя parentElement я найти не смог
+//! ЗАКРЫВВАЕТ POPUP ОКНА ПРИ НАЖАТИ НА КРЕСТИК
 for (let i = 0; i < buttonsClose.length; i++) {
   buttonsClose[i].addEventListener('click', function (e) {
     e.target.parentElement.parentElement.classList.remove('popup_active');
@@ -57,7 +54,7 @@ formUser.addEventListener('submit', function (event) {
 formCard.addEventListener('submit', function (event) {
   event.preventDefault();
   if (popupNameCard.value !== '' && popupLinkCard.value !== '') {
-    createCard(popupNameCard.value, popupLinkCard.value);
+    addCard(createCard(popupNameCard.value, popupLinkCard.value), galeryContainer);
   }
   popupNameCard.value = "";
   popupLinkCard.value = "";
@@ -65,7 +62,7 @@ formCard.addEventListener('submit', function (event) {
   closePopup(popupCard);
 });
 
-//! ОТКРЫВАЕТ POPUP ОКНА
+//! ОТКРЫВАЕТ POPUP ОКНО ПРИ НАЖАТИИ НА КНОПКУ
 function setOpenListenersToPopup(popup, openBt) {
   openBt.addEventListener('click', function () {
     popup.classList.add('popup_active');
@@ -74,12 +71,12 @@ function setOpenListenersToPopup(popup, openBt) {
   });
 }
 
-//! ДЕЛАЕТ ЭЛЕМЕНТ ВИДИМЫМ
+//! ОТКРЫВАЕТ POPUP
 function openPopup(popup) {
   popup.classList.add('popup_active');
 }
 
-//! ДЕЛАЕТ ЭЛЕМЕТ НЕВИДИМЫМ
+//! ЗАКРЫВАЕТ POPUP
 function closePopup(popup) {
   popup.classList.remove('popup_active');
 }
@@ -105,7 +102,7 @@ function createCard(name, link) {
   cardElement.querySelector('.galery__button-heart').addEventListener('click', function (e) {
     e.target.classList.toggle('galery__button-heart_active');
   });
-  addCard(cardElement, galeryContainer);
+  return cardElement;
 }
 
 //! ДОБАВЛЯЕТ КАРТУ В ГАЛЕРЕЮ
