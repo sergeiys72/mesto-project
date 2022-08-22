@@ -21,8 +21,8 @@ const popupLinkCard = popupCard.querySelector('.popup__input_type_about');
 const popupImage = document.querySelector('#image');
 const popupImg = document.querySelector('.popup__image');
 const popupText = document.querySelector('.popup__text');
-const buttonsClose = document.querySelectorAll('.popup__button-close');
 const galeryContainer = document.querySelector('.galery__grid-container');
+const popupAll = document.querySelectorAll('.popup');
 const galeryCard = document.querySelector('#galery-card').content;
 
 //! ДОБАВЛЯЕТ НОВЫЕ 6 КАРТ ИЗ МАСИВА "initialCards"
@@ -31,12 +31,19 @@ for (let i = 0; i < initialCards.length; ++i) {
   addCard(createCard(initialCards[i].name, initialCards[i].link), galeryContainer);
 }
 
-//! ЗАКРЫВВАЕТ POPUP ОКНА ПРИ НАЖАТИ НА КРЕСТИК\
-for (let i = 0; i < buttonsClose.length; i++) {
-  buttonsClose[i].addEventListener('click', function (e) {
+//! ЗАКРЫВВАЕТ POPUP ОКНА ПРИ НАЖАТИ НА КРЕСТИК ИЛИ НА ПРОСТРАНСТВО ВОКРУГ\
+window.addEventListener('click', function (e) {
+  if (e.target.classList.contains('popup__button-close') || e.target.classList.contains('popup')) {
     closePopup(e.target.closest('.popup'));
-  });
-}
+  }
+})
+window.addEventListener('keydown', function (e) {
+  popupAll.forEach(function (item) {
+    closePopup(item);
+  })
+});
+
+
 
 //! ОТКРЫТИЕ POPUP ДЛЯ ДОБАВЛЕНИЯ КАРТОЧЕК
 cardBtAdd.addEventListener('click', function () {
