@@ -13,7 +13,7 @@ const popupUser = document.querySelector('#user');
 const popupCard = document.querySelector('#card');
 
 
-const popupImage = document.querySelector('#image');
+const popupImage = document.C;
 const popupImg = document.querySelector('.popup__image');
 const popupText = document.querySelector('.popup__text');
 const galeryContainer = document.querySelector('.galery__grid-container');

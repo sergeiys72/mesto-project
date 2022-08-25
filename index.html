@@ -52,14 +52,14 @@
     <div class="popup__container">
       <button class="popup__button-close" type="button" aria-label="close popup"></button>
       <h2 class="popup__title">Редактировать профиль</h2>
-      <form id="popup__form" action="#" method="post" name="formAbout" novalidate>
-        <input class="popup__input popup__input_type_name" type="text" name="name" placeholder="Имя" required
-          minlength='2' maxlength='40'>
-        <span class="form__input-error error-name-user"></span>
-        <input class="popup__input popup__input_type_about" type="text" name="about" placeholder="О себе" required
-          minlength='2' maxlength='200'>
+      <form class="form" action="#" method="post" name="formAbout" novalidate>
+        <input id="input-name-user" class="form__input form__input_type_name " type="text" name="name" placeholder="Имя"
+          required minlength='2' maxlength='40'>
+        <span class="form__input-error error-name-user form__input-error_active"></span>
+        <input id="input-about-user" class="form__input form__input_type_about" type="text" name="about"
+          placeholder="О себе" required minlength='2' maxlength='200'>
         <span class="form__input-error error-about-user"></span>
-        <button class="popup__button" type="submit">Сохранить</button>
+        <button class="form__submit" type="submit">Сохранить</button>
       </form>
     </div>
   </div>
@@ -68,12 +68,14 @@
     <div class="popup__container">
       <button class="popup__button-close" type="button" aria-label="close popup"></button>
       <h2 class="popup__title">Новое место</h2>
-      <form id="popup__form" action="#" method="post" name="formCard" novalidate>
-        <input class="popup__input popup__input_type_name" type="text" name="name" placeholder="Название">
-        <span class="form__input-error error-name-card">dcdc</span>
-        <input class="popup__input popup__input_type_about" type="text" name="link" placeholder="Ссылка на картинку">
-        <span class="form__input-error error-link-card">scsdc</span>
-        <button class="popup__button" type="submit">Сохранить</button>
+      <form class="form" action="#" method="post" name="formCard" novalidate>
+        <input id="input-name-card" class="form__input form__input_type_name" type="text" name="name"
+          placeholder="Название">
+        <span class="form__input-error error-name-card form__input-error_active"></span>
+        <input id="input-link-card" class="form__input form__input_type_about" type="text" name="link"
+          placeholder="Ссылка на картинку">
+        <span class="form__input-error error-link-card form__input-error_active"></span>
+        <button class="form__submit" type="submit">Сохранить</button>
       </form>
     </div>
   </div>

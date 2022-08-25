@@ -1,5 +1,6 @@
-import { formUser, formCard } from "./lets.js";
+import { formUser, formCard, errorElementName } from "./lets.js";
 const allForms = Array.from(document.forms);
+
 
 allForms.forEach(function (form) {
   form.addEventListener('submit', (e) => {
@@ -12,6 +13,24 @@ allForms.forEach(function (form) {
   });
 });
 
-const showError = () => {
-
+const showError = (errorElement, errorMessage) => {
+  errorElement.classList.add('form__input-error_active');
+  errorElement.textContent = errorMessage;
 }
+
+const hindError = (errorElement) => {
+  errorElement.classList.remove('form__input-error_active');
+  errorElement.textContent = '';
+}
+
+const checkInputValidate = () => {
+  if (!formUser.name.validity.valid) {
+    showError(errorElementName, formUser.name.validationMessage);
+  } else {
+    hindError(errorElementName);
+  }
+}
+
+formUser.name.addEventListener('input', function (e) {
+  checkInputValidate();
+});
