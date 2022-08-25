@@ -1,5 +1,6 @@
 //! ИМПОРТ МАСИВА С КАРТАМИ
 import { initialCards } from "./container-for-card.js";
+import { formUser, formCard } from "./lets.js";
 
 //! ПЕРЕМЕННЫЕ
 const profile = document.querySelector('.profile');
@@ -9,14 +10,8 @@ const profileName = profile.querySelector('.profile__name');
 const profileAbout = profile.querySelector('.profile__about');
 
 const popupUser = document.querySelector('#user');
-const formUser = popupUser.querySelector('#popup__form');
-const popupNameUser = popupUser.querySelector('.popup__input_type_name');
-const popupAboutUser = popupUser.querySelector('.popup__input_type_about');
-
 const popupCard = document.querySelector('#card');
-const formCard = popupCard.querySelector('#popup__form');
-const popupNameCard = popupCard.querySelector('.popup__input_type_name');
-const popupLinkCard = popupCard.querySelector('.popup__input_type_about');
+
 
 const popupImage = document.querySelector('#image');
 const popupImg = document.querySelector('.popup__image');
@@ -25,22 +20,28 @@ const galeryContainer = document.querySelector('.galery__grid-container');
 const popupAll = document.querySelectorAll('.popup');
 const galeryCard = document.querySelector('#galery-card').content;
 
+
+
+
+
 //! ДОБАВЛЯЕТ НОВЫЕ 6 КАРТ ИЗ МАСИВА "initialCards"
 galeryContainer.innerHTML = "";
 for (let i = 0; i < initialCards.length; ++i) {
   addCard(createCard(initialCards[i].name, initialCards[i].link), galeryContainer);
 }
 
-//! ЗАКРЫВВАЕТ POPUP ОКНА ПРИ НАЖАТИ НА КРЕСТИК ИЛИ НА ПРОСТРАНСТВО ВОКРУГ\
+//! ЗАКРЫВВАЕТ POPUP ОКНА ПРИ НАЖАТИ НА КРЕСТИК ИЛИ НА ПРОСТРАНСТВО ВОКРУГ или на кнопку ESC\
 window.addEventListener('click', function (e) {
   if (e.target.classList.contains('popup__button-close') || e.target.classList.contains('popup')) {
     closePopup(e.target.closest('.popup'));
   }
-})
+});
 window.addEventListener('keydown', function (e) {
   popupAll.forEach(function (item) {
-    closePopup(item);
-  })
+    if (e.key === 'Escape') {
+      closePopup(item);
+    }
+  });
 });
 
 
@@ -53,17 +54,17 @@ cardBtAdd.addEventListener('click', function () {
 //! ОТКРЫТИЕ POPUP ДЛЯ РЕДОКТИРОВАНИЯ ПРОФИЛЯ
 profileBtEdit.addEventListener('click', function () {
   openPopup(popupUser);
-  popupNameUser.value = profileName.textContent;
-  popupAboutUser.value = profileAbout.textContent;
+  formUser.name.value = profileName.textContent;
+  formUser.about.value = profileAbout.textContent;
 });
 
 //! РЕДАКТИРУЕТ ДАННЫЕ "О СЕБЕ" В ПРОФИЛЕ
 formUser.addEventListener('submit', function (event) {
   event.preventDefault();
 
-  if (popupNameUser.value !== '' && popupAboutUser.value !== '') {
-    profileName.textContent = popupNameUser.value;
-    profileAbout.textContent = popupAboutUser.value;
+  if (formUser.name.value !== '' && formUser.about.value !== '') {
+    profileName.textContent = formUser.name.value;
+    profileAbout.textContent = formUser.about.value;
   }
   closePopup(popupUser);
 });
@@ -71,11 +72,11 @@ formUser.addEventListener('submit', function (event) {
 //! ДОБАВЛЯЕТ НОВЫЕ КАРТЫ В ГАЛЕРЕЮ
 formCard.addEventListener('submit', function (event) {
   event.preventDefault();
-  if (popupNameCard.value !== '' && popupLinkCard.value !== '') {
-    addCard(createCard(popupNameCard.value, popupLinkCard.value), galeryContainer);
+  if (formCard.name.value !== '' && formCard.link.value !== '') {
+    addCard(createCard(formCard.name.value, formCard.link.value), galeryContainer);
   }
-  popupNameCard.value = "";
-  popupLinkCard.value = "";
+  formCard.name.value = "";
+  formCard.link.value = "";
 
   closePopup(popupCard);
 });

@@ -52,21 +52,28 @@
     <div class="popup__container">
       <button class="popup__button-close" type="button" aria-label="close popup"></button>
       <h2 class="popup__title">Редактировать профиль</h2>
-      <form id="popup__form" action="#" method="post" name="info_about_user">
-        <input class="popup__input popup__input_type_name" type="text" name="name" placeholder="Имя">
-        <input class="popup__input popup__input_type_about" type="text" name="about" placeholder="О себе">
-        <input class="popup__button" type="submit" value="Сохранить">
+      <form id="popup__form" action="#" method="post" name="formAbout" novalidate>
+        <input class="popup__input popup__input_type_name" type="text" name="name" placeholder="Имя" required
+          minlength='2' maxlength='40'>
+        <span class="form__input-error error-name-user"></span>
+        <input class="popup__input popup__input_type_about" type="text" name="about" placeholder="О себе" required
+          minlength='2' maxlength='200'>
+        <span class="form__input-error error-about-user"></span>
+        <button class="popup__button" type="submit">Сохранить</button>
       </form>
     </div>
   </div>
+
   <div class="popup" id="card">
     <div class="popup__container">
       <button class="popup__button-close" type="button" aria-label="close popup"></button>
       <h2 class="popup__title">Новое место</h2>
-      <form id="popup__form" action="#" method="post" name="add_new_card">
+      <form id="popup__form" action="#" method="post" name="formCard" novalidate>
         <input class="popup__input popup__input_type_name" type="text" name="name" placeholder="Название">
+        <span class="form__input-error error-name-card">dcdc</span>
         <input class="popup__input popup__input_type_about" type="text" name="link" placeholder="Ссылка на картинку">
-        <input class="popup__button" type="submit" value="Сохранить">
+        <span class="form__input-error error-link-card">scsdc</span>
+        <button class="popup__button" type="submit">Сохранить</button>
       </form>
     </div>
   </div>
@@ -87,8 +94,11 @@
       <button class="galery__button-heart" type="button" aria-label="like"></button>
     </li>
   </template>
-
+  <script src="./js/lets.js" type="module"></script>
+  <script src="./js/validate.js" type="module"></script>
   <script src="./js/script.js" type="module"></script>
+
+
 </body>
 
 </html>
