@@ -11,12 +11,12 @@
   border: 0;
 }
 
-.popup__button:hover {
+.form__submit:hover {
   background-color: rgb(0, 0, 0, 0.8);
 }
 
 @media screen and (max-width: 767.98px) {
-  .popup__button{
+  .form__submit{
     font-size: 14px;
     line-height: 16.94px;
   }

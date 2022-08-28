@@ -1,36 +1,56 @@
-import { formUser, formCard, errorElementName } from "./lets.js";
-const allForms = Array.from(document.forms);
+const allForms = document.forms;
 
+setEventListeners(allForms);
 
-allForms.forEach(function (form) {
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-  });
+//!выводит ошибку при проверке валидации
+const showError = (form, formInput, errorMessage) => {
+  const spanError = form.querySelector(`.${formInput.id}-error`);
+  spanError.classList.add('form__input-error_active');
+  spanError.textContent = errorMessage;
+};
 
-  form.addEventListener('input', (e) => {
-    console.log(e.target.validity.valid);
-    //e.target.validity.valid;
-  });
-});
+//! скрыть ошибку при проверке валидации
+const hindError = (form, formInput) => {
+  const spanError = form.querySelector(`.${formInput.id}-error`);
+  spanError.classList.remove('form__input-error_active');
+  spanError.textContent = '';
+};
 
-const showError = (errorElement, errorMessage) => {
-  errorElement.classList.add('form__input-error_active');
-  errorElement.textContent = errorMessage;
-}
-
-const hindError = (errorElement) => {
-  errorElement.classList.remove('form__input-error_active');
-  errorElement.textContent = '';
-}
-
-const checkInputValidate = () => {
-  if (!formUser.name.validity.valid) {
-    showError(errorElementName, formUser.name.validationMessage);
+//! проверка инпута на валидацию
+const checkInputValidate = (form, formInput) => {
+  const submit = form.querySelector('.form__submit');
+  if (formInput.validity.patternMismatch) {
+    formInput.setCustomValidity(formInput.dataset.errorMessage);
+    submit.setAttribute('disabled', 'disabled');
   } else {
-    hindError(errorElementName);
+    formInput.setCustomValidity('');
+    submit.removeAttribute('disabled', 'disabled');
   }
+  if (!formInput.validity.valid) {
+    showError(form, formInput, formInput.validationMessage);
+    submit.classList.add('form__submit_disabled');
+    submit.setAttribute('disabled', 'disabled');
+  } else {
+    hindError(form, formInput);
+    submit.classList.remove('form__submit_disabled');
+    submit.removeAttribute('disabled', 'disabled');
+  }
+};
+
+//! применить валидацию ко всем инпутам в форме
+function validInput(form) {
+  const allInput = Array.from(form.querySelectorAll('.form__input'));
+  allInput.forEach(function (input) {
+    input.addEventListener('input', function () {
+      checkInputValidate(form, input);
+    });
+  });
 }
 
-formUser.name.addEventListener('input', function (e) {
-  checkInputValidate();
-});
+//! применить валидация ко всем формам
+function setEventListeners(allForms) {
+  const formArray = Array.from(allForms);
+  formArray.forEach(function (form) {
+    validInput(form);
+  });
+}

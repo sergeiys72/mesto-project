@@ -1,6 +1,8 @@
 //! ИМПОРТ МАСИВА С КАРТАМИ
 import { initialCards } from "./container-for-card.js";
-import { formUser, formCard } from "./lets.js";
+//import { formUser, formCard, allError } from "./lets.js";
+import { createCard, addCard } from "./card.js";
+import { openPopup, closePopup, formUser, formCard } from "./utils.js";
 
 //! ПЕРЕМЕННЫЕ
 const profile = document.querySelector('.profile');
@@ -11,14 +13,9 @@ const profileAbout = profile.querySelector('.profile__about');
 
 const popupUser = document.querySelector('#user');
 const popupCard = document.querySelector('#card');
-
-
-const popupImage = document.C;
-const popupImg = document.querySelector('.popup__image');
-const popupText = document.querySelector('.popup__text');
 const galeryContainer = document.querySelector('.galery__grid-container');
 const popupAll = document.querySelectorAll('.popup');
-const galeryCard = document.querySelector('#galery-card').content;
+
 
 
 
@@ -54,17 +51,17 @@ cardBtAdd.addEventListener('click', function () {
 //! ОТКРЫТИЕ POPUP ДЛЯ РЕДОКТИРОВАНИЯ ПРОФИЛЯ
 profileBtEdit.addEventListener('click', function () {
   openPopup(popupUser);
-  formUser.name.value = profileName.textContent;
-  formUser.about.value = profileAbout.textContent;
+  formUser.inputOne.value = profileName.textContent;
+  formUser.inputTwo.value = profileAbout.textContent;
 });
 
 //! РЕДАКТИРУЕТ ДАННЫЕ "О СЕБЕ" В ПРОФИЛЕ
 formUser.addEventListener('submit', function (event) {
   event.preventDefault();
 
-  if (formUser.name.value !== '' && formUser.about.value !== '') {
-    profileName.textContent = formUser.name.value;
-    profileAbout.textContent = formUser.about.value;
+  if (formUser.inputOne.value !== '' && formUser.inputTwo.value !== '') {
+    profileName.textContent = formUser.inputOne.value;
+    profileAbout.textContent = formUser.inputTwo.value;
   }
   closePopup(popupUser);
 });
@@ -72,50 +69,12 @@ formUser.addEventListener('submit', function (event) {
 //! ДОБАВЛЯЕТ НОВЫЕ КАРТЫ В ГАЛЕРЕЮ
 formCard.addEventListener('submit', function (event) {
   event.preventDefault();
-  if (formCard.name.value !== '' && formCard.link.value !== '') {
-    addCard(createCard(formCard.name.value, formCard.link.value), galeryContainer);
+  if (formCard.inputOne.value !== '' && formCard.inputTwo.value !== '') {
+    addCard(createCard(formCard.inputOne.value, formCard.inputTwo.value), galeryContainer);
   }
-  formCard.name.value = "";
-  formCard.link.value = "";
+  formCard.inputOne.value = "";
+  formCard.inputTwo.value = "";
 
   closePopup(popupCard);
 });
-
-//! ОТКРЫВАЕТ POPUP
-function openPopup(popup) {
-  popup.classList.add('popup_active');
-}
-
-//! ЗАКРЫВАЕТ POPUP
-function closePopup(popup) {
-  popup.classList.remove('popup_active');
-}
-
-//! СОЗДАЕТ ЗАГОТОВКУ КАРТЫ
-function createCard(name, link) {
-  const cardElement = galeryCard.querySelector('.galery__card').cloneNode(true);
-
-  cardElement.querySelector('.galery__delet').addEventListener('click', function (e) {
-    e.target.closest('.galery__card').remove();
-  });
-  cardElement.querySelector('.galery__image').src = link;
-  cardElement.querySelector('.galery__image').alt = name;
-  cardElement.querySelector('.galery__image').addEventListener('click', function (e) {
-
-    popupImg.src = e.target.src;
-    popupText.textContent = name;
-    openPopup(popupImage);
-  });
-  cardElement.querySelector('.galery__title').textContent = name;
-  cardElement.querySelector('.galery__button-heart').addEventListener('click', function (e) {
-    e.target.classList.toggle('galery__button-heart_active');
-  });
-  return cardElement;
-}
-
-//! ДОБАВЛЯЕТ КАРТУ В ГАЛЕРЕЮ
-function addCard(card, container) {
-  container.prepend(card);
-}
-
 

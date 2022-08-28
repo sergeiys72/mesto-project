@@ -53,13 +53,20 @@
       <button class="popup__button-close" type="button" aria-label="close popup"></button>
       <h2 class="popup__title">Редактировать профиль</h2>
       <form class="form" action="#" method="post" name="formAbout" novalidate>
-        <input id="input-name-user" class="form__input form__input_type_name " type="text" name="name" placeholder="Имя"
-          required minlength='2' maxlength='40'>
-        <span class="form__input-error error-name-user form__input-error_active"></span>
-        <input id="input-about-user" class="form__input form__input_type_about" type="text" name="about"
-          placeholder="О себе" required minlength='2' maxlength='200'>
-        <span class="form__input-error error-about-user"></span>
-        <button class="form__submit" type="submit">Сохранить</button>
+        <label for="" class="form__label">
+          <span class="form__input-error input-name-user-error form__input-error_active"></span>
+          <input id="input-name-user" class="form__input form__input_type_name " type="text" name="inputOne"
+            placeholder="Имя" required minlength='2' maxlength='40' pattern="^[A-Za-zА-Яа-яЁё \-]+$"
+            data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы">
+        </label>
+        <label for="" class="form__label">
+          <span class="form__input-error input-about-user-error form__input-error_active"></span>
+          <input id="input-about-user" class="form__input form__input_type_about" type="text" name="inputTwo"
+            placeholder="О себе" required minlength='2' maxlength='200' pattern="^[A-Za-zА-Яа-яЁё \-]+$"
+            data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы">
+        </label>
+        <!-- form__submit_disabled  -->
+        <button class="form__submit">Сохранить</button>
       </form>
     </div>
   </div>
@@ -69,16 +76,22 @@
       <button class="popup__button-close" type="button" aria-label="close popup"></button>
       <h2 class="popup__title">Новое место</h2>
       <form class="form" action="#" method="post" name="formCard" novalidate>
-        <input id="input-name-card" class="form__input form__input_type_name" type="text" name="name"
-          placeholder="Название">
-        <span class="form__input-error error-name-card form__input-error_active"></span>
-        <input id="input-link-card" class="form__input form__input_type_about" type="text" name="link"
-          placeholder="Ссылка на картинку">
-        <span class="form__input-error error-link-card form__input-error_active"></span>
-        <button class="form__submit" type="submit">Сохранить</button>
+        <label for="" class="form__label">
+          <span class="form__input-error input-name-card-error form__input-error_active"></span>
+          <input id="input-name-card" class="form__input form__input_type_name" type="text" name="inputOne required"
+            placeholder="Название" required minlength='2' minlength='2' maxlength='30' pattern="^[A-Za-zА-Яа-яЁё \-]+$"
+            data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы">
+        </label>
+        <label for="" class="form__label">
+          <span class="form__input-error input-link-card-error form__input-error_active"></span>
+          <input id="input-link-card" class="form__input form__input_type_about" type="url" name="inputTwo required"
+            placeholder="Ссылка на картинку" required minlength='2'>
+        </label>
+        <button class="form__submit">Сохранить</button>
       </form>
     </div>
   </div>
+
   <div class="popup" id="image">
     <div class="popup__image-container">
       <button class="popup__button-close" type="button" aria-label="close popup"></button>
@@ -97,7 +110,9 @@
     </li>
   </template>
   <script src="./js/lets.js" type="module"></script>
+  <script src="./js/utils.js" type="module"></script>
   <script src="./js/validate.js" type="module"></script>
+  <script src="./js/card.js" type="module"></script>
   <script src="./js/script.js" type="module"></script>
 
 
