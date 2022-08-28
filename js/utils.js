@@ -1,5 +1,11 @@
 export const formUser = document.forms.formAbout;
 export const formCard = document.forms.formCard;
+export const popupUser = document.querySelector('#user');
+export const popupCard = document.querySelector('#card');
+export const profileName = document.querySelector('.profile__name');
+export const profileAbout = document.querySelector('.profile__about');
+
+
 //! ОТКРЫВАЕТ POPUP
 export function openPopup(popup) {
   popup.classList.add('popup_active');
